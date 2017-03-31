@@ -1,0 +1,38 @@
+【原创：神经网络与深度学习系列一：】win7下安装tensorflow 1.0.1 
+
+#install tensorflow under windows 7 platform#
+
+Tensorflow是支持windows下用cpu跑神经网络运算的。
+
+我采用的基于anaconda3的安装，有点小坑。基本步骤如下。
+
+1， 安装anaconda,桌面云都是64bit,这里选用的是带python3.6的安装包, https://repo.continuum.io/archive/Anaconda3-4.3.1-Windows-x86_64.exe。 如果安装的是带python3.5的版本且是没有配置好代理的，请直接参考1.1和1.2，并跳过2,3。
+
+1.1 下载并安装Microsoft Visual C++ 2015 Redistributable Update 3, 下载地址https://www.microsoft.com/en-us/download/details.aspx?id=53587 。   1.2 安装Python 3.5 from Anaconda, 下载地址https://repo.continuum.io/archive/index.html。选版本Anaconda3-4.2.0-Windows-x86_64并下载。
+
+2 ,   安装附件中提供的本地代理软件cntlm。填写参考附件中的ini文件，cntlm -H 可以查看使用方法。
+
+      将浏览器中的代理配置为 cntlm.ini 中的配置值: 比如你cntlm侦听的端口是3333，本地的ip是10.61.17.17，则配置为 10.61.17.17:3333。
+
+3，指定python版本为3.5。 写这篇文章的时候还不支持3.6，所以后面的版本很重要。指定3.5后，conda会下载对应python版本以及对应组件。你可以继续安装 jupyter notebook,scipy,numpy等插件。
+
+-bash代码
+1
+conda create --name tensorflow python=3.5
+2
+activate tensorflow
+3
+conda install jupyter
+4
+conda install scipy
+5
+pip install tensorflow  # 这一步出错。Pip好像找不到对应的版本。
+
+4,  因为pip install tensorflow出错了，而且怎么也解决不了。直接到pip包管理网站上下载了依赖和安装包，tensorflow依赖protobuf。进入到文件所在目录，先安装protobuf，再安装tensorflow。
+-bash代码
+1
+pip install protobuf-3.2.0rc2-py2.py3-none-any.whl
+2
+pip install tensorflow-1.0.1-cp35-cp35m-win_amd64.whl
+
+5, 测试tensorflow是否work。开始你的AI之旅。
